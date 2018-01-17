@@ -1,150 +1,207 @@
 package s4c.microservices.data_visualization;
 
-import java.util.HashMap;
-import org.junit.Assert;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.context.WebApplicationContext;
 
-import s4c.microservices.model.DummieResponse;
+import s4c.microservices.data_visualization.model.entity.Dashboards;
+import s4c.microservices.data_visualization.model.entity.Widgets;
+import s4c.microservices.data_visualization.model.repository.DashboardsRepository;
+import s4c.microservices.data_visualization.model.repository.WidgetsRepository;
+
+import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = Application.class)
+@WebAppConfiguration
 public class TestSuiteTest {
-
-	@Autowired
-	private TestRestTemplate restTemplate;
-
-	@Test
-	public void listDashboardsTest() {
-		ResponseEntity<DummieResponse> response = this.restTemplate.getForEntity("/data-visualization/dashboards",
-				DummieResponse.class, String.class);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-
-	}
-
-	@Test
-	public void addDashboardsTest() {
-		String json = "{\"id\":\"666\"}";
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> request = new HttpEntity<String>(json, headers);
-		ResponseEntity<DummieResponse> response = this.restTemplate.postForEntity("/data-visualization/dashboards/",
-				request, DummieResponse.class);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
-
+	static final String dashboard_json = "{\"name\":\"Dashboard#1\",\"owner\":\"Emergya\",\"_public\": true}";
+	static final String dashboard_complete_json = "{\"name\":\"Dashboard#1\",\"owner\":\"Emergya\",\"_public\": true,\"assets\":[{\"asset\":\"Asset A\"},{\"asset\":\"Asset B\"}],\"widgets\":[{\"name\":\"Widget A\",\"sources\": [{\"url\":\"http://google.es\",\"parameters\":[{\"name\":\"parameter_a\",\"operator\":\"operator_a\",\"value\":\"value_a\"},{\"name\":\"parameter_b\",\"operator\":\"operator_b\",\"value\":\"value_b\"}]}],\"type\":{\"name\":\"pieChart\"},\"properties\": [{\"name\" :\"width\", \"value\":\"220px\"},{\"name\" :\"height\", \"value\":\"220px\"},{\"name\" :\"position\", \"value\":\"top\"}]}]}";
+	static final String widget_json = "{\"name\":\"Widget B\",\"sources\":[{\"url\":\"http://google..es\",\"parameters\":[{\"name\":\"parameter_a\",\"operator\":\"operator_a\",\"value\":\"value_a\"},{\"name\":\"parameter_b\",\"operator\":\"operator_b\",\"value\":\"value_b\"}]}],\"type\":{\"name\":\"pieChart\"},\"properties\": [{\"name\" :\"width\", \"value\":\"220px\"},{\"name\" :\"height\", \"value\":\"220px\"},{\"name\" :\"position\", \"value\":\"top\"}]}";
 	
-	@Test
-	public void getDashboardsByIdTest() {
-		 HashMap<String, String> urlVariables = new HashMap<String, String>();
-		 urlVariables.put("id", "44");		 
-		ResponseEntity<DummieResponse> response = this.restTemplate.getForEntity("/data-visualization/dashboards/{id}",
-				 DummieResponse.class,urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
-	@Test
-	public void updateDashboardsTest() {
-		HashMap<String, String> urlVariables = new HashMap<String, String>();
-		urlVariables.put("id", "44");
+    private MockMvc mockMvc;
+    private List<Dashboards> dashboardList = new ArrayList<>();
+    private HttpMessageConverter<?> mappingJackson2HttpMessageConverter;
 
-		String json = "{\"nombre\":\"Fede\"}";
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> request = new HttpEntity<String>(json, headers);
-		ResponseEntity<String> response = restTemplate.exchange("/data-visualization/dashboards/{id}", HttpMethod.PUT,
-				request, String.class, urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
-	
+    private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
+            MediaType.APPLICATION_JSON.getSubtype(),
+            Charset.forName("utf8"));
+    
+    @Autowired 
+    private DashboardsRepository dashboardsRepository;
+    @Autowired 
+    private WidgetsRepository widgetsRepository;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+    
+    @Autowired
+    void setConverters(HttpMessageConverter<?>[] converters) {
+
+        this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
+            .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter)
+            .findAny()
+            .orElse(null);
+
+        assertNotNull("the JSON message converter must not be null",
+                this.mappingJackson2HttpMessageConverter);
+    }
+    
+    @After
+    public void ends(){
+    	this.dashboardsRepository.deleteAll();
+    }
+    
+    @Before
+    public void setup() throws Exception {    	
+        this.mockMvc = webAppContextSetup(webApplicationContext).build();
+
+        this.widgetsRepository.deleteAllInBatch();
+        this.dashboardsRepository.deleteAllInBatch();
+        
+        try {
+        	
+        	Dashboards dashCompleto = new Dashboards(3L,"Dashboard Completo", true, "Emergya");
+        	Widgets widget = new Widgets(1L,"Widget A");
+        	widget.setDashboard(dashCompleto);
+        	ArrayList<Widgets> aWidgets=new ArrayList<>();
+        	aWidgets.add(widget);
+        	dashCompleto.setWidgets((aWidgets));
+        	
+	        this.dashboardList.add(dashboardsRepository.save(new Dashboards(1L,"Dashboard A", true, "Emergya")));
+	        this.dashboardList.add(dashboardsRepository.save(new Dashboards(2L,"Dashboard B", false, "Emergya")));
+	        this.dashboardList.add(dashboardsRepository.save(dashCompleto));
+        } catch (DataIntegrityViolationException e){
+        	this.dashboardList.add(dashboardsRepository.findOne(1L));
+        	this.dashboardList.add(dashboardsRepository.findOne(2L));
+        }
+        
+    }
+
 	@Test
-	public void deleteDashboardsTest() {
-		HashMap<String, String> urlVariables = new HashMap<String, String>();
-		urlVariables.put("id", "44");		
-		ResponseEntity<String> response = restTemplate.exchange("/data-visualization/dashboards/{id}", HttpMethod.DELETE,
-				null, String.class, urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
-	
-	
-	@Test
-	public void getWidgetsInDashboardsTest() {
-		String url = "/data-visualization/dashboards/{id}/widgets";
-		 HashMap<String, String> urlVariables = new HashMap<String, String>();
-		 urlVariables.put("id", "44");		 
-		ResponseEntity<DummieResponse> response = this.restTemplate.getForEntity(url,
-				 DummieResponse.class,urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+	public void listDashboardsTest() throws Exception {
+		String url="/data-visualization/dashboards";
+		mockMvc.perform(get(url)).andExpect(status().isOk());
 	}
 
 	@Test
-	public void createWidgetsInDashboardsTest() {
-		String url = "/data-visualization/dashboards/{id}/widgets";
-		 HashMap<String, String> urlVariables = new HashMap<String, String>();
-		 urlVariables.put("id", "44");
-		String json = "{\"id\":\"666\"}";
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> request = new HttpEntity<String>(json, headers);
+	public void addDashboardsTest() throws Exception {
 		
-		ResponseEntity<DummieResponse> response = this.restTemplate.postForEntity(url,
-				request, DummieResponse.class,urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+		String url = "/data-visualization/dashboards/";
+		mockMvc.perform(post(url)
+				.content(dashboard_json)
+				.contentType(contentType)
+				).andExpect(status().isOk());
+	}
+
+	
+	@Test
+	public void getDashboardsByIdTest() throws Exception {
+		 String url="/data-visualization/dashboards/" + 
+		 this.dashboardList.get(0).getId();		 
+		 mockMvc.perform(get(url)).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void updateDashboardsTest() throws Exception {
+		String url="/data-visualization/dashboards/" + 
+				 this.dashboardList.get(1).getId();
 		
+		mockMvc.perform(put(url)
+				.content(dashboard_json)
+				.contentType(contentType)
+				).andExpect(status().isOk());
+	}
+
+	@Test
+	public void deleteDashboardsTest() throws Exception {
+		
+		String url="/data-visualization/dashboards/" + 
+				 this.dashboardList.get(1).getId();
+		
+		mockMvc.perform(delete(url)				
+				.contentType(contentType)
+				).andExpect(status().isOk());		
+
+	}
+
+	@Test
+	public void getWidgetsInDashboardsTest() throws Exception {
+		String url = "/data-visualization/dashboards/" + this.dashboardList.get(0).getId() + "/widgets";
+		mockMvc.perform(get(url)).andExpect(status().isOk());
+	}
+
+	@Test
+	public void createWidgetsInDashboardsTest() throws Exception {
+		String url = "/data-visualization/dashboards/" + this.dashboardList.get(0).getId() + "/widgets";
+
+		mockMvc.perform(post(url)
+				.content(widget_json)
+				.contentType(contentType)
+				).andExpect(status().isOk());		
 	}
 	
 	@Test
-	public void findWidgetsInDashboardsTest() {
-		String url = "/data-visualization/dashboards/{id}/widgets/{widgetId}";
-		 HashMap<String, String> urlVariables = new HashMap<String, String>();
-		 urlVariables.put("id", "44");
-		 urlVariables.put("widgetId", "44");	
-		ResponseEntity<DummieResponse> response = this.restTemplate.getForEntity(url,
-				 DummieResponse.class,urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+	public void findWidgetsInDashboardsTest() throws Exception {
+		String url = "/data-visualization/dashboards/" 
+	+ this.dashboardList.get(2).getId() 
+	+ "/widgets/" 
+	+ this.dashboardList.get(2).getWidgets().iterator().next().getId() ;
+		
+		mockMvc.perform(get(url)				
+				.contentType(contentType)
+				).andExpect(status().isOk());
+
 	}
 
 	@Test
-	public void updateWidgetsInDashboardsTest() {
-		String url = "/data-visualization/dashboards/{id}/widgets/{widgetId}";
-		 HashMap<String, String> urlVariables = new HashMap<String, String>();
-		 urlVariables.put("id", "44");
-		 urlVariables.put("widgetId", "44");
-
-		String json = "{\"nombre\":\"Fede\"}";
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> request = new HttpEntity<String>(json, headers);
-		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT,
-				request, String.class, urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+	public void updateWidgetsInDashboardsTest() throws Exception {
+		String url = "/data-visualization/dashboards/" 
+				+ this.dashboardList.get(2).getId() 
+				+ "/widgets/" 
+				+ this.dashboardList.get(2).getWidgets().iterator().next().getId() ;
+		
+		mockMvc.perform(put(url)
+				.content(widget_json)
+				.contentType(contentType)
+				).andExpect(status().isOk());
 	}
 
 	@Test
-	public void deleteWidgetsInDashboardsTest() {
-		String url = "/data-visualization/dashboards/{id}/widgets/{widgetId}";
-		HashMap<String, String> urlVariables = new HashMap<String, String>();
-		urlVariables.put("id", "44");
-		urlVariables.put("widgetId", "44");	
-		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE,
-				null, String.class, urlVariables);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+	public void deleteWidgetsInDashboardsTest() throws Exception {
+		String url = "/data-visualization/dashboards/" 
+				+ this.dashboardList.get(2).getId() 
+				+ "/widgets/" 
+				+ this.dashboardList.get(2).getWidgets().iterator().next().getId() ;
+		
+		mockMvc.perform(delete(url)				
+				.contentType(contentType)
+				).andExpect(status().isOk());		
+
 	}
 	
 	@Test
-	public void listWidgetsTest() {
-		String url = "/data-visualization//widgets";	
-		ResponseEntity<DummieResponse> response = this.restTemplate.getForEntity(url,
-				 DummieResponse.class);
-		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+	public void listWidgetsTest() throws Exception {
+		String url = "/data-visualization//widgets";
+		mockMvc.perform(get(url)).andExpect(status().isOk());
 	}
 }
