@@ -3,19 +3,6 @@ server:
 spring:
   application:
     name: s4c-microservice-data-visualization
-#    jpa:
-#      database: MYSQL
-#      show-sql: true
-#      hibernate:
-#        dialect: org.hibernate.dialect.MySQL5Dialect
-#        ddl-auto: validate
-#    datasource:
-#      platform: mysql
-#      driver-class-name: com.mysql.jdbc.Driver
-#      url: jdbc:mysql://localhost:3306/data_visualization
-#      usernme : root
-#      password: rod436tr
-
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10

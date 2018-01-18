@@ -5,7 +5,6 @@
 	<groupId>s4c.microservices</groupId>
 	<artifactId>data-visualization</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 
 	<name>data-visualization</name>
 	<url>http://maven.apache.org</url>
@@ -21,6 +20,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		      <start-class>s4c.microservices.data_visualization.Application</start-class>
 	</properties>
 
 	<dependencies>
@@ -91,6 +91,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-tomcat</artifactId>
+		<scope>provided</scope>
+	</dependency>
 	</dependencies>
 
 
@@ -153,4 +159,5 @@
 			
 		</plugins>
 	</build>
+	<packaging>war</packaging>
 </project> 
