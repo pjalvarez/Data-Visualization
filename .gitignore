@@ -1,0 +1,3 @@
+src/src/main/resources/application-dev.properties
+src/target/
+src/unpacked-war-file/
