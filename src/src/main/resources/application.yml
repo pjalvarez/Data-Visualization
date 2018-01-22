@@ -1,5 +1,5 @@
 server:
-  port: 3333
+  port: 8080 
 spring:
   application:
     name: s4c-microservice-data-visualization
@@ -9,7 +9,7 @@ eureka:
     leaseExpirationDurationInSeconds: 11
   client:
     serviceUrl:
-      defaultZone: http://us1.fiwoo.eu:3331/eureka/
+      defaultZone: http://dev-sac-fase-dos-eureka-registry.emergyalabs.com:8080/eureka/
     healthcheck:
       enabled: true
     lease: null
