@@ -1,4 +1,4 @@
-src/src/main/resources/application-dev.properties
+src/src/main/resources/application-*.properties
 src/src/main/resources/application.yml
 src/target/
 src/unpacked-war-file/
