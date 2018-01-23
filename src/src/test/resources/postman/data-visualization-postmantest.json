@@ -1,37 +1,38 @@
 {
 	"info": {
 		"name": "data-visualization",
-		"_postman_id": "d6bd558d-f154-6902-be46-161fb09a16aa",
-		"description": "",
+		"_postman_id": "1eed6ba1-d43d-c9f2-baf4-ec63c9066fcc",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards GET",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards GET",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards POST",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards POST",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -53,126 +54,129 @@
 					"raw": "{\n\t\"name\":\"Dashboard#1\",\n\t\"owner\":\"Emergya\",\n\t\"_public\": true,\n\t\"assets\":[\n\t{\"asset\":\"Asset A\"},\n\t{\"asset\":\"Asset B\"}\n\t],\n\t\"widgets\": [\n\t\t{\n\t\t\t\"name\":\"Widget A\",\n\t\t\t\"sources\": [\n\t\t\t\t{\n\t\t\t\t\t\"url\":\"http://www.google.es\",\n\t\t\t\t\t\"parameters\":[\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_a\",\n\t\t\t\t\t\t\t\"operator\":\"operator_a\",\n\t\t\t\t\t\t\t\"value\":\"value_a\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_b\",\n\t\t\t\t\t\t\t\"operator\":\"operator_b\",\n\t\t\t\t\t\t\t\"value\":\"value_b\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"type\":{\"name\":\"pieChart\"},\n\t\t\t\"properties\": [\n\t\t\t\t{\"name\" :\"width\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"height\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"position\", \"value\":\"top\"}\n\t\t\t]\n\t\t\t\n\t\t}\n\t]\n\t\n}"
 				},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards GET",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards GET",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/1",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
-						"{dashboardId}"
+						"1"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards PUT",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards PUT",
 			"request": {
 				"method": "PUT",
-				"header": [],
-				"body": {},
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Dashboard#donyXXX\",\n\t\"owner\":\"RaFo\",\n\t\"_public\": true,\n\t\"assets\":[\n\t{\"asset\":\"Asset 2M\"},\n\t{\"asset\":\"Asset M2M\"}\n\t],\n\t\"widgets\": [\n\t\t{\n\t\t\t\"name\":\"Widget M\",\n\t\t\t\"sources\": [\n\t\t\t\t{\n\t\t\t\t\t\"url\":\"http://google..es\",\n\t\t\t\t\t\"parameters\":[\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_a\",\n\t\t\t\t\t\t\t\"operator\":\"operator_a\",\n\t\t\t\t\t\t\t\"value\":\"value_a\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_b\",\n\t\t\t\t\t\t\t\"operator\":\"operator_b\",\n\t\t\t\t\t\t\t\"value\":\"value_b\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"type\":{\"name\":\"winki\"},\n\t\t\t\"properties\": [\n\t\t\t\t{\"name\" :\"width\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"height\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"position\", \"value\":\"top\"}\n\t\t\t]\n\t\t\t\n\t\t}\n\t]\n\t\n}"
+				},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/10",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
-						"{dashboardId}"
+						"10"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards DELETE",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards DELETE",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/11",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
-						"{dashboardId}"
+						"11"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets GET",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets GET",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/7/widgets",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
-						"{dashboardId}",
+						"7",
 						"widgets"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets POST",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets POST",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -194,94 +198,102 @@
 					"raw": "{\n\t\t\t\"name\":\"Widget X\",\n\t\t\t\"sources\": [\n\t\t\t\t{\n\t\t\t\t\t\"url\":\"http://google..es\",\n\t\t\t\t\t\"parameters\":[\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_a\",\n\t\t\t\t\t\t\t\"operator\":\"operator_a\",\n\t\t\t\t\t\t\t\"value\":\"value_a\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_b\",\n\t\t\t\t\t\t\t\"operator\":\"operator_b\",\n\t\t\t\t\t\t\t\"value\":\"value_b\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"type\":{\"name\":\"winki\"},\n\t\t\t\"properties\": [\n\t\t\t\t{\"name\" :\"width\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"height\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"position\", \"value\":\"top\"}\n\t\t\t]\n\t\t\t\n\t\t}"
 				},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/7/widgets",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
-						"{dashboardId}",
+						"7",
 						"widgets"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets GET",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets GET",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets/{widgetId}",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/7/widgets/7",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
-						"{dashboardId}",
+						"7",
 						"widgets",
-						"{widgetId}"
+						"7"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets PUT",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets PUT",
 			"request": {
 				"method": "PUT",
-				"header": [],
-				"body": {},
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\": \"Widget XXY__\",\n   \"sources\": [   {\n      \"url\": \"http://google..com\",\n      \"parameters\":       [\n                  {\n            \"name\": \"parameter_a\",\n            \"value\": \"value_a\",\n            \"operator\": \"operator_a\"\n         },\n                  {\n            \"name\": \"parameter_b\",\n            \"value\": \"value_b\",\n            \"operator\": \"operator_b\"\n         }\n      ]\n   }],\n   \"type\": null,\n   \"properties\":    [\n            {\n\n         \"name\": \"width\",\n         \"value\": \"220px\"\n      },\n            {\n\n         \"name\": \"height\",\n         \"value\": \"220px\"\n      },\n            {\n\n         \"name\": \"position\",\n         \"value\": \"top\"\n      }\n   ]\n}"
+				},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets/{widgetId}",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/7/widgets/7",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
-						"{dashboardId}",
+						"7",
 						"widgets",
-						"{widgetId}"
+						"7"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets DELETE",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets DELETE",
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/dashboards/{dashboardId}/widgets/{widgetId}",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets/{widgetId}",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"dashboards",
@@ -289,32 +301,33 @@
 						"widgets",
 						"{widgetId}"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://us1.fiwoo.eu:9000/data-visualization/widgets GET",
+			"name": "http://us1.fiwoo.eu:8000/data-visualization/widgets GET",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://us1.fiwoo.eu:9000/data-visualization/widgets",
+					"raw": "http://us1.fiwoo.eu:8000/data-visualization/widgets",
 					"protocol": "http",
 					"host": [
 						"us1",
 						"fiwoo",
 						"eu"
 					],
-					"port": "9000",
+					"port": "8000",
 					"path": [
 						"data-visualization",
 						"widgets"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		}
