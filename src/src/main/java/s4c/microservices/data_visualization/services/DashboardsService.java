@@ -72,8 +72,7 @@ public class DashboardsService implements IDashboardsService {
 	private Dashboards setRelations(Dashboards dashboard) {
 		if (dashboard.getAssets() != null){
 			
-			for(Assets asset : dashboard.getAssets()){
-				dashboard.addAsset(asset);
+			for(Assets asset : dashboard.getAssets()){				
 				asset.setDashboard(dashboard);
 			}
 			
