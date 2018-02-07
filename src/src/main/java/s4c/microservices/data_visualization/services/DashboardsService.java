@@ -71,13 +71,7 @@ public class DashboardsService implements IDashboardsService {
 	 */
 	private Dashboards setRelations(Dashboards dashboard) {
 		if (dashboard.getAssets() != null){
-			
-			for(Assets asset : dashboard.getAssets()){				
-				asset.setDashboard(dashboard);
-			}
-			
-		}
-			//dashboard.getAssets().forEach(asset -> asset.setDashboard(dashboard));
+			dashboard.getAssets().forEach(asset -> asset.setDashboard(dashboard));
 
 		Consumer<Sources> consumerSource = new Consumer<Sources>() {
 			public void accept(Sources source) {
