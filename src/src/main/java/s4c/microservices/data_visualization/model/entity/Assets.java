@@ -21,6 +21,14 @@ public class Assets {
 	
 	private String asset;
 	
+	
+	public Assets(){}
+	
+	public Assets(long id, String asset){
+		this.id=id;
+		this.asset=asset;
+	}
+	
 	@ManyToOne
     @JoinColumn(name="dashboard_id")
 	@JsonIgnore	

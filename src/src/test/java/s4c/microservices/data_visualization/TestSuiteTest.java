@@ -23,6 +23,9 @@ import org.springframework.web.context.WebApplicationContext;
 import s4c.microservices.data_visualization.model.entity.Dashboards;
 import s4c.microservices.data_visualization.model.entity.Widgets;
 import s4c.microservices.data_visualization.model.repository.DashboardsRepository;
+import s4c.microservices.data_visualization.model.repository.SourceParametersRepository;
+import s4c.microservices.data_visualization.model.repository.SourcesRepository;
+import s4c.microservices.data_visualization.model.repository.WidgetPropertiesRepository;
 import s4c.microservices.data_visualization.model.repository.WidgetsRepository;
 
 import static org.junit.Assert.*;
@@ -51,6 +54,13 @@ public class TestSuiteTest {
     private DashboardsRepository dashboardsRepository;
     @Autowired 
     private WidgetsRepository widgetsRepository;
+    @Autowired 
+    private WidgetPropertiesRepository wpPrepository;
+    @Autowired 
+    private SourcesRepository sourcesRepository;
+    @Autowired 
+    private SourceParametersRepository spRepository;
+    
     @Autowired
     private WebApplicationContext webApplicationContext;
     
@@ -75,6 +85,9 @@ public class TestSuiteTest {
     public void setup() throws Exception {    	
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
 
+        this.spRepository.deleteAllInBatch();
+        this.sourcesRepository.deleteAllInBatch();
+        this.wpPrepository.deleteAllInBatch();
         this.widgetsRepository.deleteAllInBatch();
         this.dashboardsRepository.deleteAllInBatch();
         

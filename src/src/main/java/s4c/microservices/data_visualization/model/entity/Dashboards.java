@@ -6,6 +6,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -55,6 +56,12 @@ public class Dashboards implements Serializable {
 	}
 
 
+	public void addAsset(Assets asset){
+		if(assets == null)
+			assets = new ArrayList<Assets>();
+		
+		assets.add(asset);
+	}
 
 	public Collection<Assets> getAssets() {
 		return assets;
@@ -94,6 +101,11 @@ public class Dashboards implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;		
+	}
+
+	public void removeAsset(Assets asset) {
+		assets.remove(asset);
+		
 	}
 
 }
