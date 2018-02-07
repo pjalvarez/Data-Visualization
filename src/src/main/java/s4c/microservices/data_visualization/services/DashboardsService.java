@@ -70,7 +70,7 @@ public class DashboardsService implements IDashboardsService {
 	 * @return dashboard
 	 */
 	private Dashboards setRelations(Dashboards dashboard) {
-		if (dashboard.getAssets() != null){
+		if (dashboard.getAssets() != null)
 			dashboard.getAssets().forEach(asset -> asset.setDashboard(dashboard));
 
 		Consumer<Sources> consumerSource = new Consumer<Sources>() {
