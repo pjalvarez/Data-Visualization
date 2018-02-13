@@ -11,9 +11,9 @@ public interface IDashboardsService {
 	public Dashboards getDashboardById(String dashboardId);
 	public Boolean updateDashboard(String dashboardId, Dashboards dashboard);
 	public Boolean  deleteDashboard(String dashboardId);
-	public List<Widgets> getWidgetsInDashboard(String dashboardId);
-	public List<Widgets>  createWidgetInDashboard(String dashboardId, Widgets widget);
+	public List<Widgets> getWidgetsInDashboard(String dashboardId);	
 	public Widgets  findWidgetInDashboard(String dashboardId, String widgetId);
 	public Boolean  updateWidgetInDashboard(String dashboardId, String widgetId, Widgets newWidget);
 	public Boolean  deleteWidgetInDashboard(String dashboardId, String widgetId);
+	List<Widgets> createWidgetInDashboard(String dashboardId, Widgets widget, String rowId, String colId);
 }

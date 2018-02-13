@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -24,17 +23,22 @@ class SwaggerConfig {
      * @return Swagger Docket
      */
     @Bean
-    public Docket s4cApi() {
+    public Docket s4cApi() {    	
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("s4c")
-                .apiInfo(apiInfo())
-                .select()
-                    .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                    .paths(PathSelectors.any())
-                    .build()
-                .pathMapping("/")
-                .genericModelSubstitutes(ResponseEntity.class)
-                .useDefaultResponseMessages(false);
+                .select()    
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .groupName("s4c")
+//                .apiInfo(apiInfo())
+//                .select()
+//                    .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+//                    .paths(PathSelectors.any())
+//                    .build()
+//                .pathMapping("/")
+//                .genericModelSubstitutes(ResponseEntity.class)
+//                .useDefaultResponseMessages(false);
     }
 
     /**

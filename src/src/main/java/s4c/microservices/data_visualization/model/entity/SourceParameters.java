@@ -27,7 +27,7 @@ public class SourceParameters {
 	private String operator;
 	
 	@ManyToOne
-    @JoinColumn(name="sources_id", nullable=false)
+    @JoinColumn(name="sources_id", nullable=true)
 	@JsonIgnore
 	private Sources source;
 	
@@ -60,6 +60,10 @@ public class SourceParameters {
 
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+
+	public void setId(Long id) {
+		this.id=id;		
 	}
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -21,7 +22,7 @@ public class Sources implements Serializable {
 	@NotBlank
 	public String url;
 
-	@OneToMany(mappedBy="source", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="source"  ,cascade = {CascadeType.ALL}, orphanRemoval=true)
 	public Collection<SourceParameters> parameters;
 	
 
@@ -46,6 +47,19 @@ public class Sources implements Serializable {
 			<SourceParameters> parameters) {
 		this.parameters = parameters;
 	}
+	
+	
+	public void addParameter(SourceParameters param){
+		if(this.parameters==null)
+			this.parameters =  new ArrayList<SourceParameters>();
+		parameters.add(param);
+	}
+	
+	public void removeParameter(SourceParameters param){
+		if(this.parameters!=null)
+			parameters.remove(param);
+			
+	}
 
 	public String getUrl() {
 		return url;
@@ -54,4 +68,11 @@ public class Sources implements Serializable {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}	
 }

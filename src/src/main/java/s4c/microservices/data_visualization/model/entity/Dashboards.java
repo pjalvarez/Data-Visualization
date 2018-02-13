@@ -23,24 +23,73 @@ public class Dashboards implements Serializable {
 	@NotBlank
 	public String name;
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL)
-	private Collection<Widgets> widgets;
+	
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL, orphanRemoval=true)
+	public Collection<Rows> rows;
+	
 
-	@LazyCollection(LazyCollectionOption.FALSE)
+//	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL)
 	public Collection<Assets> assets;
 
+	/**
+	 * @return the rows
+	 */
+	public Collection<Rows> getRows() {
+		return rows;
+	}
+
+	/**
+	 * @param rows the rows to set
+	 */
+	public void setRows(Collection<Rows> rows) {
+		this.rows = rows;
+	}
+
 	@NotBlank
-	public String owner;
+	private String owner;
 	
 	@Column(nullable = false, columnDefinition = "BOOLEAN")
-	public Boolean _public;
+	private Boolean _public;
+	
+	public String structure;
+	
+
+	/**
+	 * @return the _public
+	 */
+	public Boolean get_public() {
+		return _public;
+	}
+
+	/**
+	 * @param _public the _public to set
+	 */
+	public void set_public(Boolean _public) {
+		this._public = _public;
+	}
+
+	/**
+	 * @return the structure
+	 */
+	public String getStructure() {
+		return structure;
+	}
+
+	/**
+	 * @param structure the structure to set
+	 */
+	public void setStructure(String structure) {
+		this.structure = structure;
+	}
+
+	
 	
 	
 	public Dashboards () {}
 	
-	public Dashboards (Long id, String name, boolean isPublic, String owner) {
+	public Dashboards (String name, boolean isPublic, String owner) {
 		this.id = id;
 		this.name= name;
 		this._public=isPublic;
@@ -87,14 +136,6 @@ public class Dashboards implements Serializable {
 		this._public = _public;
 	}
 
-	public Collection<Widgets> getWidgets() {
-		return widgets;
-	}
-
-	public void setWidgets(Collection<Widgets> widgets) {
-		this.widgets = widgets;
-	}
-	
 	public Long getId(){
 		return this.id;
 	}
@@ -106,6 +147,17 @@ public class Dashboards implements Serializable {
 	public void removeAsset(Assets asset) {
 		assets.remove(asset);
 		
+	}
+
+	public void addRow(Rows row) {
+		if(this.rows==null)
+			rows = new ArrayList<Rows>();
+		
+		rows.add(row);		
+	}
+	public void removeRow(Rows row) {
+		if(this.rows!=null)
+			rows.remove(row);		
 	}
 
 }
