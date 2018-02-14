@@ -506,14 +506,6 @@ public class DashboardsService implements IDashboardsService {
 	 */
 	private Dashboards setRelations(Dashboards dashboard, boolean removeIfNotPresent) {
 
-//		if (dashboard.getAssets() != null) {
-//			dashboard.getAssets().forEach(asset -> asset.setDashboard(dashboard));
-//		}
-		
-		
-		
-		
-
 		if (dashboard.getRows() != null) {
 			ArrayList<Rows> toRemove = new ArrayList<Rows>();
 			for (Rows row : dashboard.getRows()) {
