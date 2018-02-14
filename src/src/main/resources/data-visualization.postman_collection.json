@@ -51,7 +51,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"name\": \"Dashboard#1\",\n\"structure\": \"8-4-4/8-4-4\",\n\"rows\": [\n\t{\n\t\t\"columns\": [\n\t\t\t{\n\t\t\t\t\"styleClass\": \"eight wide\",\n\t\t\t\t\"widgets\": [                           \n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\":16,\n\n\n\t\t            \"propertyPages\": [\n\t\t\t\t\t              {\n\t\t\t\t\t\t\t\t\t\"id\": 11,\n\t\t\t\t\t                \"displayName\": \"Configuration Yeah!\",\n\t\t\t\t\t                \"properties\": [              \n\t\t\t\t\t\t\t\t\t{\n \t\t\n\t\t\t\t\t                    \"_controlType\": \"llkkkkkl\",\n\t\t\t\t\t                    \"_key\": \"title\",\n\t\t\t\t\t                    \"_label\": \"Title\",\n\t\t\t\t\t                    \"_value\": \"Temperature from Sensor\",\n\t\t\t\t\t                    \"_required\": false,\n\t\t\t\t\t                    \"_order\": 15\n\t\t\t\t\t                  },\n\t\t\t\t\t                  \n\t\t\t\t\t                  {\n\t\t\t\t\t                  \t\n\t\t\t\t\t                    \"_controlType\": \"textbox26\",\n\t\t\t\t\t                    \"_key\": \"instanceId24\",\n\t\t\t\t\t                    \"_label\": \"Widget id\",\n\t\t\t\t\t                    \"_value\": \"980px\",\n\t\t\t\t\t                    \"_required\": false,\n\t\t\t\t\t                    \"_order\": -1\n\t\t\t\t\t                  }\n\t\t\t\t\t                ]\n\t\t\t\t\t              }          \n\t\t\t\t\t            ]\n\t\t\t\t   \n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t]\n\t}\n],\n\"owner\": \"Emergya\",\n\"_public\": true\n}"
+							"raw": "{\n\"name\": \"Dashboard#1\",\n\"structure\": \"8-4-4/8-4-4\",\n\"rows\": [\n\t{\n\t\t\"columns\": [\n\t\t\t{\n\t\t\t\t\"styleClass\": \"eight wide\",\n\t\t\t\t\"widgets\": [                           \n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\":16,\n\n\n\t\t            \"propertyPages\": [\n\t\t\t\t\t              {\n\t\t\t\t\t\t\t\t\t\"id\": 11,\n\t\t\t\t\t                \"displayName\": \"Configuration Yeah!\",\n\t\t\t\t\t                \"properties\": [              \n\t\t\t\t\t\t\t\t\t{\n \t\t\n\t\t\t\t\t                    \"_controlType\": \"llkkkkkl\",\n\t\t\t\t\t                    \"_key\": \"title\",\n\t\t\t\t\t                    \"_label\": \"Title\",\n\t\t\t\t\t                    \"_value\": \"Temperature from Sensor\",\n\t\t\t\t\t                    \"_required\": false,\n\t\t\t\t\t                    \"_order\": 15\n\t\t\t\t\t                  },\n\t\t\t\t\t                  \n\t\t\t\t\t                  {\n\t\t\t\t\t                  \t\n\t\t\t\t\t                    \"_controlType\": \"textbox26\",\n\t\t\t\t\t                    \"_key\": \"instanceId24\",\n\t\t\t\t\t                    \"_label\": \"Widget id\",\n\t\t\t\t\t                    \"_value\": \"980px\",\n\t\t\t\t\t                    \"_required\": false,\n\t\t\t\t\t                    \"_order\": -1\n\t\t\t\t\t                  }\n\t\t\t\t\t                ]\n\t\t\t\t\t              }          \n\t\t\t\t\t            ]\n\t\t\t\t   \n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t]\n\t}\n],\n\"owner\": \"861\",\n\"_public\": true\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8000/data-visualization/dashboards",
@@ -105,10 +105,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 1,\n    \"name\": \"Dashboard#1\",\n    \"rows\": [\n        {\n           \"id\":2,\n            \"columns\": [\n                {\n                    \"widgets\": null,\n                    \"styleClass\": \"eight wide\"\n                }\n            ]\n        }\n    ],\n    \"assets\": [\n        {\n            \"id\": 1,\n            \"asset\": \"AA\"\n        },\n        {\n            \"id\": 2,\n            \"asset\": \"BB\"\n        }\n    ],\n    \"owner\": \"Emergya\",\n    \"_public\": true,\n    \"structure\": \"8-4-4/8-4-4\"\n}"
+							"raw": "{\n\n    \"name\": \"Dashboard#1\",\n    \"rows\": [\n        {\n           \"id\":3,\n            \"columns\": [\n            \t\n                {\n                \t\"id\":3,\n                    \"widgets\": [{\"id\":13,\"name\":\"Widget\"}],\n                    \"styleClass\": \"eight wide\"\n                }\n            ]\n        }\n    ],\n    \"assets\": [\n        {\n            \"id\": 1,\n            \"asset\": \"AA\"\n        },\n        {\n            \"id\": 2,\n            \"asset\": \"BB\"\n        }\n    ],\n    \"owner\": 861,\n    \"_public\": true,\n    \"structure\": \"8-4-4/8-4-4\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8000/data-visualization/dashboards/1",
+							"raw": "http://localhost:8000/data-visualization/dashboards/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -117,7 +117,7 @@
 							"path": [
 								"data-visualization",
 								"dashboards",
-								"1"
+								"3"
 							]
 						}
 					},
