@@ -28,7 +28,7 @@ import s4c.microservices.data_visualization.services.external.UserManagementServ
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "s4c.microservices.data_visualization.model")
-@ComponentScan("s4c.microservices.data_visualization")
+@ComponentScan("s4c.microservices")
 @EntityScan("s4c.microservices.data_visualization.model.entity")
 public class Application extends SpringBootServletInitializer {
 
