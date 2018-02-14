@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import s4c.microservices.data_visualization.model.Assets;
 import s4c.microservices.data_visualization.model.entity.Actions;
-
 import s4c.microservices.data_visualization.model.entity.Columns;
 import s4c.microservices.data_visualization.model.entity.Dashboards;
 import s4c.microservices.data_visualization.model.entity.Properties;
@@ -33,10 +33,14 @@ import s4c.microservices.data_visualization.model.repository.SourcesRepository;
 import s4c.microservices.data_visualization.model.repository.TagsRepository;
 import s4c.microservices.data_visualization.model.repository.WidgetPropertiesRepository;
 import s4c.microservices.data_visualization.model.repository.WidgetsRepository;
+import s4c.microservices.data_visualization.services.external.UserManagementService;
 
 @Service
 public class DashboardsService implements IDashboardsService {
 
+	@Autowired
+	private UserManagementService userManagementService;
+	
 	@Autowired
 	private DashboardsRepository dashboardsRepository;
 	@Autowired
@@ -69,7 +73,14 @@ public class DashboardsService implements IDashboardsService {
 	@Override
 	public List<Dashboards> listDashboards() {
 
-		return dashboardsRepository.findAll();
+		
+		List<Dashboards> entities = dashboardsRepository.findAll();
+		for(Dashboards d : entities){		
+			List<Assets> assetsList =userManagementService.getAssetsByUser(d.getOwner());
+			d.setAssets(assetsList);
+		}
+				
+		return entities;
 
 	}
 
@@ -495,9 +506,13 @@ public class DashboardsService implements IDashboardsService {
 	 */
 	private Dashboards setRelations(Dashboards dashboard, boolean removeIfNotPresent) {
 
-		if (dashboard.getAssets() != null) {
-			dashboard.getAssets().forEach(asset -> asset.setDashboard(dashboard));
-		}
+//		if (dashboard.getAssets() != null) {
+//			dashboard.getAssets().forEach(asset -> asset.setDashboard(dashboard));
+//		}
+		
+		
+		
+		
 
 		if (dashboard.getRows() != null) {
 			ArrayList<Rows> toRemove = new ArrayList<Rows>();
@@ -773,7 +788,14 @@ public class DashboardsService implements IDashboardsService {
 	 * 
 	 */
 	public Dashboards getDashboardById(String dashboardId) {
-		return dashboardsRepository.findOne(Long.parseLong(dashboardId));
+		
+		Dashboards dashboard = dashboardsRepository.findOne(Long.parseLong(dashboardId));
+		if(dashboard != null){
+			List<Assets> assetsList =userManagementService.getAssetsByUser(dashboard.getOwner());
+			dashboard.setAssets(assetsList);
+		}
+		
+		return dashboard;
 	}
 
 	/**

@@ -4,7 +4,12 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
+
+import s4c.microservices.data_visualization.model.Assets;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,7 +35,8 @@ public class Dashboards implements Serializable {
 	
 
 //	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL)
+	//@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL)
+	@Transient
 	public Collection<Assets> assets;
 
 	/**
@@ -47,8 +53,8 @@ public class Dashboards implements Serializable {
 		this.rows = rows;
 	}
 
-	@NotBlank
-	private String owner;
+	@NotNull
+	private Long owner;
 	
 	@Column(nullable = false, columnDefinition = "BOOLEAN")
 	private Boolean _public;
@@ -89,8 +95,7 @@ public class Dashboards implements Serializable {
 	
 	public Dashboards () {}
 	
-	public Dashboards (String name, boolean isPublic, String owner) {
-		this.id = id;
+	public Dashboards (String name, boolean isPublic, Long owner) {		
 		this.name= name;
 		this._public=isPublic;
 		this.owner = owner;
@@ -120,11 +125,11 @@ public class Dashboards implements Serializable {
 		this.assets = assets;
 	}
 
-	public String getOwner() {
+	public Long getOwner() {
 		return owner;
 	}
 
-	public void setOwner(String owner) {
+	public void setOwner(Long owner) {
 		this.owner = owner;
 	}
 
