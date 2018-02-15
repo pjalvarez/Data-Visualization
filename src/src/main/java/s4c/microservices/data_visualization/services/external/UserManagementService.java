@@ -1,5 +1,6 @@
 package s4c.microservices.data_visualization.services.external;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ public class UserManagementService {
     	   	if(response.getStatusCode().equals(HttpStatus.OK)){
 	    		return new ArrayList<Assets>(Arrays.asList(((Assets[])response.getBody())));
 	    	}
-    	} catch (HttpClientErrorException e){
+    	} catch (Exception ex){
     		return new ArrayList<Assets>(); 
     	}
     	

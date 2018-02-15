@@ -27,7 +27,7 @@ public class SourceParameters {
 	private String operator;
 	
 	@ManyToOne
-    @JoinColumn(name="sources_id", nullable=true)
+    @JoinColumn(name="sources_id", nullable=false)
 	@JsonIgnore
 	private Sources source;
 	

@@ -125,10 +125,14 @@ public class DashboardsService implements IDashboardsService {
 				}
 			}
 
+			
 			for (SourceParameters s : toAdd) {
+			
 				source.getParameters().add(s);
 			}
+			
 			for (SourceParameters s : toRemove) {
+			
 				source.getParameters().remove(s);
 			}
 		}
@@ -149,6 +153,9 @@ public class DashboardsService implements IDashboardsService {
 
 				source.setWidget(widget);
 				source = getRidOfSourceParameters(source);
+				
+				
+				
 
 				if (source.getId() != null) {
 					Sources original = sourceRepository.findOne(source.getId());
@@ -557,7 +564,6 @@ public class DashboardsService implements IDashboardsService {
 				} else {
 					Widgets w = this.widgetRepository.findOne(widget.getId());
 					if (w != null) {
-
 						w = this.updateWidget(w, widget, column, removeIfNotPresent);
 
 						toAdd.add(w);
@@ -606,8 +612,9 @@ public class DashboardsService implements IDashboardsService {
 			w.setIcon(widget.getIcon());
 		if (widget.getName() != null && w.getName()!=null && !w.getName().equals(widget.getName()))
 			w.setName(widget.getName());
+		
 		if (widget.getType() != null && widget.getType().getName() != null && !widget.getType().getName().isEmpty()) {
-			if (w.getType() != null && !w.getType().equals(widget.getType())) {
+			if ((w.getType()==null) || (w.getType() != null && !w.getType().equals(widget.getType()))) {
 				SourceType type = sourceTypeRepository.findOneByName(widget.getType().getName());
 				if (type != null) {
 					w.setType(type);
@@ -618,7 +625,7 @@ public class DashboardsService implements IDashboardsService {
 		} else
 			w.setType(null);
 
-		w.getSources().addAll(widget.getSources());
+		w.getSources().addAll(widget.getSources());		
 		w = this.getRidOfSources(w, removeIfNotPresent);
 
 		w.getTags().addAll(widget.getTags());
@@ -800,7 +807,7 @@ public class DashboardsService implements IDashboardsService {
 
 			original.set_public(dashboard.is_public());
 			original = this.getRidOfRows(dashboard, original);
-
+			
 			if (dashboard.getName() != null && !dashboard.getName().equals(original.getName()))
 				original.setName(dashboard.getName());
 			if (dashboard.getOwner() != null && !dashboard.getOwner().equals(original.getOwner()))
@@ -830,7 +837,9 @@ public class DashboardsService implements IDashboardsService {
 			for (Rows source : dashboard.getRows()) {
 
 				source.setDashboard(dashboard);
+								
 				source = getRidOfColumns(source);
+								
 
 				if (source.getId() != null) {
 					Rows original = rowsRepository.findOne(source.getId());
@@ -876,6 +885,11 @@ public class DashboardsService implements IDashboardsService {
 			return original;
 
 		}
+		
+		
+		
+		
+		
 
 		return dashboard;
 	}
@@ -929,7 +943,7 @@ public class DashboardsService implements IDashboardsService {
 			ArrayList<Columns> toAdd = new ArrayList<Columns>();
 			ArrayList<Columns> toRemove = new ArrayList<Columns>();
 			for (Columns source : row.getColumns()) {
-				source.setRow(row);
+				source.setRow(row);				
 
 				if (source.getId() != null) {
 					Columns original = columnsRepository.findOne(source.getId());
@@ -939,9 +953,12 @@ public class DashboardsService implements IDashboardsService {
 								&& !source.getStyleClass().equals(original.getStyleClass())) {
 							original.setStyleClass(source.getStyleClass());
 						}
+						
+						original.setWidgets(source.getWidgets());
 						original.setRow(row);
 						toRemove.add(source);
 						toAdd.add(original);
+						
 					} else {
 						// if doesnt found, will create it!
 						source.setId(null);
@@ -952,8 +969,9 @@ public class DashboardsService implements IDashboardsService {
 			for (Columns s : toAdd) {
 				row.getColumns().add(s);
 			}
-			for (Columns s : toRemove)
+			for (Columns s : toRemove){
 				row.getColumns().remove(s);
+			}
 		}
 
 		return row;
