@@ -2,14 +2,16 @@ sudo: required
 
 language: bash
 
+branches:
+  only:
+    - master
+
 services:
   - docker
 
 env:
   global:
     - DOCKER_IMAGE=fiwoo/data-visualization
-    - MICROSERVICE="Data-Visualization"
-    - TOMCAT_VERSION=8.5.27
 
 script:
   - docker build -t $DOCKER_IMAGE infrastructure/docker-containers/ubuntu_16.04-tomcat/
@@ -22,13 +24,6 @@ after_success:
       docker tag $DOCKER_IMAGE:latest $DOCKER_IMAGE:$DOCKER_IMAGE_TIMESTAMP-$DOCKER_IMAGE_COMMIT;
       docker push $DOCKER_IMAGE:latest;
       docker push $DOCKER_IMAGE:$DOCKER_IMAGE_TIMESTAMP-$DOCKER_IMAGE_COMMIT;
-
-      set -x;
-      LOWCASE_MICROSERVICE=$(echo $MICROSERVICE | tr '[:upper:]' '[:lower:]');
-      docker build -t fiwoo/$LOWCASE_MICROSERVICE:latest .;
-      docker tag fiwoo/$LOWCASE_MICROSERVICE:latest fiwoo/$LOWCASE_MICROSERVICE:$DOCKER_IMAGE_TIMESTAMP-$DOCKER_IMAGE_COMMIT;
-      docker push fiwoo/$LOWCASE_MICROSERVICE:$DOCKER_IMAGE_TIMESTAMP-$DOCKER_IMAGE_COMMIT;
-      docker push fiwoo/$LOWCASE_MICROSERVICE:latest;
     fi
 
 notifications:
