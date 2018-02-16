@@ -29,6 +29,6 @@ after_success:
 notifications:
   email:
     recipients:
-      - emergya-integration-github@emergya.com
+      - sac-fase-dos-int@emergya.com
     on_success: always
     on_failure: always
