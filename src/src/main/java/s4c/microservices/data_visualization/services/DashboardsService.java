@@ -282,8 +282,8 @@ public class DashboardsService implements IDashboardsService {
 				original.setOwner(dashboard.getOwner());
 			original.set_public(dashboard.is_public());
 
-			dashboard = setRelations(original, dashboard);
-			dashboardsRepository.saveAndFlush(dashboard);
+			original = setRelations(original, dashboard);
+			dashboardsRepository.saveAndFlush(original);
 			return true;
 		}
 		return false;

@@ -1,10 +1,8 @@
 package s4c.microservices.config;
 
-import io.swagger.annotations.Api;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
+import org.springframework.context.annotation.PropertySource;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -14,9 +12,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@PropertySource("classpath:application.properties")
 @Configuration
 @EnableSwagger2
-class SwaggerConfig {
+public class SwaggerConfig {
 
     /**
      * Create Swagger Api configuration
@@ -26,15 +25,12 @@ class SwaggerConfig {
     @Bean
     public Docket s4cApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("s4c")
-                .apiInfo(apiInfo())
-                .select()
-                    .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                    .paths(PathSelectors.any())
-                    .build()
-                .pathMapping("/")
-                .genericModelSubstitutes(ResponseEntity.class)
-                .useDefaultResponseMessages(false);
+        		.apiInfo(apiInfo())
+        		.select()                                  
+	          		.apis(RequestHandlerSelectors.any())              
+	          		.paths(PathSelectors.any())                          
+	          		.build();
+                
     }
 
     /**
