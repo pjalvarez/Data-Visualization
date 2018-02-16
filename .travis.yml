@@ -12,6 +12,7 @@ services:
 env:
   global:
     - DOCKER_IMAGE=fiwoo/data-visualization
+    - JENKINS_TOKEN=data-visualization-ahN9eex?ohyook5BeeFaf6ai1ohx_ee1
 
 script:
   - docker build -t $DOCKER_IMAGE infrastructure/docker-containers/ubuntu_16.04-tomcat/
@@ -32,3 +33,11 @@ notifications:
       - sac-fase-dos-int@emergya.com
     on_success: always
     on_failure: always
+  webhooks:
+    urls:
+      - http://ci-system-sac-fase-dos.emergyalabs.com:8080/jenkins/job/dataVisualization-MASTER-fiwoo-deployment/build?token=$JENKINS_TOKEN
+    on_success: always
+    on_failure: never
+    on_start: never
+    on_cancel: never
+    on_error: never
