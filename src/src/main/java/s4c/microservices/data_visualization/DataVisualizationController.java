@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ import java.util.List;
 @Api
 @RestController
 @RequestMapping("data-visualization")
+@CrossOrigin
 public class DataVisualizationController {
 	
 //	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -150,18 +152,20 @@ public class DataVisualizationController {
 	}	
 
 	
-	@RequestMapping(method = RequestMethod.POST, value = "dashboards/{dashboardId}/widgets")
+	@RequestMapping(method = RequestMethod.POST, value = "dashboards/{dashboardId}/{rowId}/{colId}/widgets")
 	@ApiOperation(value = "createWidgetsInDashboard", nickname = "createWidgetsInDashboard", response = DummieResponse.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = String.class),
 			@ApiResponse(code = 201, message = "OK"), @ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
 			@ApiResponse(code = 404, message = "Not Found"), @ApiResponse(code = 500, message = "Failure") })	
 	public ResponseEntity<List<Widgets>> createWidgetsInDashboard (
-			@PathVariable("dashboardId") String dashboardId, 
+			@PathVariable("dashboardId") String dashboardId,
+			@PathVariable("rowId") String rowId,
+			@PathVariable("colId") String colId,
 			@ApiParam(value = "request", required = true) 
 			@RequestBody(required = true) Widgets widget){
 		
-		List<Widgets> repositories = dashboardService.createWidgetInDashboard(dashboardId, widget);
+		List<Widgets> repositories = dashboardService.createWidgetInDashboard(dashboardId, widget,rowId,colId);
 		if(repositories != null) {
 			return new ResponseEntity<List<Widgets>>( repositories,HttpStatus.OK);
 		} else {

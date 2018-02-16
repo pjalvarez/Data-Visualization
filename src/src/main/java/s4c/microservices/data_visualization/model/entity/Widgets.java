@@ -7,11 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
 @Table(name = "widgets")
 public class Widgets implements Serializable {
+
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,26 +24,55 @@ public class Widgets implements Serializable {
 	@NotBlank
 	private String name;
 
-	@OneToMany(mappedBy="widget", cascade = CascadeType.ALL)	
-	private Collection<Sources> sources;
+	@OneToMany(mappedBy="widget", cascade = CascadeType.ALL, orphanRemoval=true)	
+	private Collection<Sources> sources = new ArrayList<Sources>();
 	
 	@OneToOne
 	private SourceType type;
 	
-	@OneToMany(mappedBy="widget", cascade = CascadeType.ALL)
-	private Collection<WidgetProperties> properties;
+	@OneToMany(mappedBy="widget", cascade = CascadeType.ALL, orphanRemoval=true)
+	private Collection<WidgetProperties> properties =new ArrayList<WidgetProperties>();
 
-	@ManyToOne
-    @JoinColumn(name="dashboard_id", nullable=false)
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JsonIgnore
-	private Dashboards dashboard;
+	private Collection<Columns> columns;
 	
-    public Dashboards getDashboard() { return dashboard; }
-    public void setDashboard(Dashboards dashboard) { this.dashboard = dashboard; }
 	
-    public Widgets() {}
-    public Widgets(Long id, String name) {
-    	this.id = id;
+	private String description;
+	private String icon;	
+	
+	@OneToMany(mappedBy="widget", cascade = CascadeType.ALL, orphanRemoval=true)
+	private Collection<Tags> tags =new ArrayList<Tags>();
+	
+	@OneToMany(mappedBy="widget", cascade = CascadeType.ALL, orphanRemoval=true)
+	private Collection<PropertyPages> propertyPages = new ArrayList<PropertyPages>();
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private Collection<Actions> actions  = new ArrayList<Actions>();
+	
+    /**
+	 * @return the columns
+	 */
+	public Collection<Columns> getColumns() {
+		return columns;
+	}
+	/**
+	 * @param columns the columns to set
+	 */
+	public void setColumns(Collection<Columns> columns) {
+		this.columns = columns;
+	}
+	
+	
+	public void addColumn(Columns column){
+		if(this.columns==null)
+			this.columns = new ArrayList<Columns>();
+		
+		this.columns.add(column);
+	}
+	
+	public Widgets() {}
+    public Widgets( String name) {    	
     	this.name = name;
     }
 
@@ -79,6 +110,78 @@ public class Widgets implements Serializable {
 
 	public void setProperties(Collection<WidgetProperties> properties) {
 		this.properties = properties;
+	}
+	
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	/**
+	 * @return the icon
+	 */
+	public String getIcon() {
+		return icon;
+	}
+	/**
+	 * @param icon the icon to set
+	 */
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	/**
+	 * @return the tags
+	 */
+	public Collection<Tags> getTags() {
+		return tags;
+	}
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(Collection<Tags> tags) {
+		this.tags = tags;
+	}
+	/**
+	 * @return the propertyPages
+	 */
+	public Collection<PropertyPages> getPropertyPages() {
+		return propertyPages;
+	}
+	/**
+	 * @param propertyPages the propertyPages to set
+	 */
+	public void setPropertyPages(Collection<PropertyPages> propertyPages) {
+		this.propertyPages = propertyPages;
+	}
+	/**
+	 * @return the actions
+	 */
+	public Collection<Actions> getActions() {
+		return actions;
+	}
+	/**
+	 * @param actions the actions to set
+	 */
+	public void setActions(Collection<Actions> actions) {
+		this.actions = actions;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public void removeColumn(Columns col) {
+		if(this.columns!=null)
+			this.columns.remove(col);
+		
 	}
 	
 	

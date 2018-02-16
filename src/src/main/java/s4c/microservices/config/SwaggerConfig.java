@@ -22,10 +22,10 @@ public class SwaggerConfig {
      *
      * @return Swagger Docket
      */
+
     @Bean
     public Docket s4cApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-        		.apiInfo(apiInfo())
         		.select()                                  
 	          		.apis(RequestHandlerSelectors.any())              
 	          		.paths(PathSelectors.any())                          

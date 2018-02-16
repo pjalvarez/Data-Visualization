@@ -62,4 +62,8 @@ public class SourceParameters {
 		this.operator = operator;
 	}
 
+	public void setId(Long id) {
+		this.id=id;		
+	}
+
 }

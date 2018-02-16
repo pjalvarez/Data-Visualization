@@ -4,7 +4,12 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
+
+import s4c.microservices.data_visualization.model.Assets;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,25 +28,74 @@ public class Dashboards implements Serializable {
 	@NotBlank
 	public String name;
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL)
-	private Collection<Widgets> widgets;
+	
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL, orphanRemoval=true)
+	public Collection<Rows> rows;
+	
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL)
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	//@OneToMany(mappedBy="dashboard", cascade = CascadeType.ALL)
+	@Transient
 	public Collection<Assets> assets;
 
-	@NotBlank
-	public String owner;
+	/**
+	 * @return the rows
+	 */
+	public Collection<Rows> getRows() {
+		return rows;
+	}
+
+	/**
+	 * @param rows the rows to set
+	 */
+	public void setRows(Collection<Rows> rows) {
+		this.rows = rows;
+	}
+
+	@NotNull
+	private Long owner;
 	
 	@Column(nullable = false, columnDefinition = "BOOLEAN")
-	public Boolean _public;
+	private Boolean _public;
+	
+	public String structure;
+	
+
+	/**
+	 * @return the _public
+	 */
+	public Boolean get_public() {
+		return _public;
+	}
+
+	/**
+	 * @param _public the _public to set
+	 */
+	public void set_public(Boolean _public) {
+		this._public = _public;
+	}
+
+	/**
+	 * @return the structure
+	 */
+	public String getStructure() {
+		return structure;
+	}
+
+	/**
+	 * @param structure the structure to set
+	 */
+	public void setStructure(String structure) {
+		this.structure = structure;
+	}
+
+	
 	
 	
 	public Dashboards () {}
 	
-	public Dashboards (Long id, String name, boolean isPublic, String owner) {
-		this.id = id;
+	public Dashboards (String name, boolean isPublic, Long owner) {		
 		this.name= name;
 		this._public=isPublic;
 		this.owner = owner;
@@ -71,11 +125,11 @@ public class Dashboards implements Serializable {
 		this.assets = assets;
 	}
 
-	public String getOwner() {
+	public Long getOwner() {
 		return owner;
 	}
 
-	public void setOwner(String owner) {
+	public void setOwner(Long owner) {
 		this.owner = owner;
 	}
 
@@ -87,14 +141,6 @@ public class Dashboards implements Serializable {
 		this._public = _public;
 	}
 
-	public Collection<Widgets> getWidgets() {
-		return widgets;
-	}
-
-	public void setWidgets(Collection<Widgets> widgets) {
-		this.widgets = widgets;
-	}
-	
 	public Long getId(){
 		return this.id;
 	}
@@ -106,6 +152,17 @@ public class Dashboards implements Serializable {
 	public void removeAsset(Assets asset) {
 		assets.remove(asset);
 		
+	}
+
+	public void addRow(Rows row) {
+		if(this.rows==null)
+			rows = new ArrayList<Rows>();
+		
+		rows.add(row);		
+	}
+	public void removeRow(Rows row) {
+		if(this.rows!=null)
+			rows.remove(row);		
 	}
 
 }

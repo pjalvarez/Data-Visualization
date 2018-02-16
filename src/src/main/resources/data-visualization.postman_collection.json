@@ -2,325 +2,306 @@
 	"info": {
 		"name": "data-visualization",
 		"_postman_id": "1eed6ba1-d43d-c9f2-baf4-ec63c9066fcc",
+		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards GET",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards POST",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
+			"name": "Dashboards",
+			"description": "",
+			"item": [
+				{
+					"name": "get Dashboards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8000/data-visualization/dashboards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards"
+							]
+						}
 					},
-					{
-						"key": "cache-control",
-						"value": "no-cache"
+					"response": []
+				},
+				{
+					"name": "Add Dashboard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "postman-token",
+								"value": "ad96fae8-1de7-0da0-d527-fa1fc6febe57"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\": \"Dashboard#1\",\n\"structure\": \"8-4-4/8-4-4\",\n\"rows\": [\n\t{\n\t\t\"columns\": [\n\t\t\t{\n\t\t\t\t\"styleClass\": \"eight wide\",\n\t\t\t\t\"widgets\": [                           \n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\":16,\n\n\n\t\t            \"propertyPages\": [\n\t\t\t\t\t              {\n\t\t\t\t\t\t\t\t\t\"id\": 11,\n\t\t\t\t\t                \"displayName\": \"Configuration Yeah!\",\n\t\t\t\t\t                \"properties\": [              \n\t\t\t\t\t\t\t\t\t{\n \t\t\n\t\t\t\t\t                    \"_controlType\": \"llkkkkkl\",\n\t\t\t\t\t                    \"_key\": \"title\",\n\t\t\t\t\t                    \"_label\": \"Title\",\n\t\t\t\t\t                    \"_value\": \"Temperature from Sensor\",\n\t\t\t\t\t                    \"_required\": false,\n\t\t\t\t\t                    \"_order\": 15\n\t\t\t\t\t                  },\n\t\t\t\t\t                  \n\t\t\t\t\t                  {\n\t\t\t\t\t                  \t\n\t\t\t\t\t                    \"_controlType\": \"textbox26\",\n\t\t\t\t\t                    \"_key\": \"instanceId24\",\n\t\t\t\t\t                    \"_label\": \"Widget id\",\n\t\t\t\t\t                    \"_value\": \"980px\",\n\t\t\t\t\t                    \"_required\": false,\n\t\t\t\t\t                    \"_order\": -1\n\t\t\t\t\t                  }\n\t\t\t\t\t                ]\n\t\t\t\t\t              }          \n\t\t\t\t\t            ]\n\t\t\t\t   \n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t}\n\t\t]\n\t}\n],\n\"owner\": \"861\",\n\"_public\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/data-visualization/dashboards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards"
+							]
+						},
+						"description": null
 					},
-					{
-						"key": "postman-token",
-						"value": "ad96fae8-1de7-0da0-d527-fa1fc6febe57"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\":\"Dashboard#1\",\n\t\"owner\":\"Emergya\",\n\t\"_public\": true,\n\t\"assets\":[\n\t{\"asset\":\"Asset A\"},\n\t{\"asset\":\"Asset B\"}\n\t],\n\t\"widgets\": [\n\t\t{\n\t\t\t\"name\":\"Widget A\",\n\t\t\t\"sources\": [\n\t\t\t\t{\n\t\t\t\t\t\"url\":\"http://www.google.es\",\n\t\t\t\t\t\"parameters\":[\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_a\",\n\t\t\t\t\t\t\t\"operator\":\"operator_a\",\n\t\t\t\t\t\t\t\"value\":\"value_a\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_b\",\n\t\t\t\t\t\t\t\"operator\":\"operator_b\",\n\t\t\t\t\t\t\t\"value\":\"value_b\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"type\":{\"name\":\"pieChart\"},\n\t\t\t\"properties\": [\n\t\t\t\t{\"name\" :\"width\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"height\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"position\", \"value\":\"top\"}\n\t\t\t]\n\t\t\t\n\t\t}\n\t]\n\t\n}"
+					"response": []
 				},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards GET",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/1",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards PUT",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\":\"Dashboard#don\",\n\t\"owner\":\"RaFo\",\n\t\"_public\": true,\n\t\"assets\":[\n\t{\"asset\":\"Asset curi xxxRi\"},\n\t{\"asset\":\"Asset M2XXXXXM\"}\n\t],\n\t\"widgets\": [\n\t\t{\n\t\t\t\"name\":\"Widget XXXXM\",\n\t\t\t\"sources\": [\n\t\t\t\t{\n\t\t\t\t\t\"url\":\"http://google.com\",\n\t\t\t\t\t\"parameters\":[\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parlkjhametkjer_xaaa\",\n\t\t\t\t\t\t\t\"operator\":\"opklkjhjerator_0\",\n\t\t\t\t\t\t\t\"value\":\"valjkhlkjue_a\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parklkjhjmeter_bxxaaa\",\n\t\t\t\t\t\t\t\"operator\":\"olkjhpekjrator_34\",\n\t\t\t\t\t\t\t\"value\":\"valukkjhje_xx\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"type\":{\"name\":\"winki\"},\n\t\t\t\"properties\": [\n\t\t\t\t{\"name\" :\"widthlkjhxkjwew\", \"value\":\"2lkjh201px\"},\n\t\t\t\t{\"name\" :\"heigkjhjhtwex\", \"value\":\"22lkjh01px\"},\n\t\t\t\t{\"name\" :\"posikjhkjtiowewenx\", \"value\":\"tlkjh1p\"}\n\t\t\t]\n\t\t\t\n\t\t}\n\t]\n\t\n}"
-				},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/1",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards DELETE",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/10",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"10"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets GET",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:5000/data-visualization/dashboards/73/widgets",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"73",
-						"widgets"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets POST",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
+				{
+					"name": "get Dashboard by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/1",
+							"protocol": "http",
+							"host": [
+								"stg-sac-fase-dos",
+								"emergyalabs",
+								"com"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards",
+								"1"
+							]
+						}
 					},
-					{
-						"key": "cache-control",
-						"value": "no-cache"
+					"response": []
+				},
+				{
+					"name": "update Dashboard",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"name\": \"Dashboard#1\",\n    \"rows\": [\n        {\n           \"id\":3,\n            \"columns\": [\n            \t\n                {\n                \t\"id\":3,\n                    \"widgets\": [{\"id\":13,\"name\":\"Widget\"}],\n                    \"styleClass\": \"eight wide\"\n                }\n            ]\n        }\n    ],\n    \"assets\": [\n        {\n            \"id\": 1,\n            \"asset\": \"AA\"\n        },\n        {\n            \"id\": 2,\n            \"asset\": \"BB\"\n        }\n    ],\n    \"owner\": 861,\n    \"_public\": true,\n    \"structure\": \"8-4-4/8-4-4\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/data-visualization/dashboards/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards",
+								"3"
+							]
+						}
 					},
-					{
-						"key": "postman-token",
-						"value": "ad96fae8-1de7-0da0-d527-fa1fc6febe57"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\t\t\"name\":\"Widget X\",\n\t\t\t\"sources\": [\n\t\t\t\t{\n\t\t\t\t\t\"url\":\"http://google..es\",\n\t\t\t\t\t\"parameters\":[\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_a\",\n\t\t\t\t\t\t\t\"operator\":\"operator_a\",\n\t\t\t\t\t\t\t\"value\":\"value_a\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_b\",\n\t\t\t\t\t\t\t\"operator\":\"operator_b\",\n\t\t\t\t\t\t\t\"value\":\"value_b\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"type\":{\"name\":\"winki\"},\n\t\t\t\"properties\": [\n\t\t\t\t{\"name\" :\"width\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"height\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"position\", \"value\":\"top\"}\n\t\t\t]\n\t\t\t\n\t\t}"
+					"response": []
 				},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/9/widgets",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"9",
-						"widgets"
-					]
+				{
+					"name": "delete Dahboard",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/10",
+							"protocol": "http",
+							"host": [
+								"stg-sac-fase-dos",
+								"emergyalabs",
+								"com"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards",
+								"10"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets GET",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/9/widgets",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"9",
-						"widgets"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets PUT",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n   \"name\": \"Widget XXY111111__\",\n   \"sources\": [   {\n      \"url\": \"http://google.es\",\n      \"parameters\":       [\n                  {\n            \"name\": \"parameter_ZZ\",\n            \"value\": \"value_c\",\n            \"operator\": \"=\"\n         },\n                  {\n            \"name\": \"parameter_q\",\n            \"value\": \">\",\n            \"operator\": \"operator_qqb\"\n         }\n      ]\n   }],\n   \"type\": {\"name\":\"controlWidgets\"},\n   \"properties\":    [\n            {\n\n         \"name\": \"width\",\n         \"value\": \"200px\"\n      },\n            {\n\n         \"name\": \"height\",\n         \"value\": \"250px\"\n      },\n            {\n\n         \"name\": \"position\",\n         \"value\": \"top\"\n      }\n   ]\n}"
+			"name": "Widgets",
+			"description": "",
+			"item": [
+				{
+					"name": "get Dashboard's widgets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/data-visualization/dashboards/73/widgets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"data-visualization",
+								"dashboards",
+								"73",
+								"widgets"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/9/widgets/1",
-					"protocol": "http",
-					"host": [
-						"stg-sac-fase-dos",
-						"emergyalabs",
-						"com"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"9",
-						"widgets",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/{dashboardId}/widgets DELETE",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/7/widgets/12",
-					"protocol": "http",
-					"host": [
-						"us1",
-						"fiwoo",
-						"eu"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"dashboards",
-						"7",
-						"widgets",
-						"12"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://us1.fiwoo.eu:8000/data-visualization/widgets GET",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
+				{
+					"name": "get All Widgets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://us1.fiwoo.eu:8000/data-visualization/widgets",
+							"protocol": "http",
+							"host": [
+								"us1",
+								"fiwoo",
+								"eu"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"widgets"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://us1.fiwoo.eu:8000/data-visualization/widgets",
-					"protocol": "http",
-					"host": [
-						"us1",
-						"fiwoo",
-						"eu"
-					],
-					"port": "8000",
-					"path": [
-						"data-visualization",
-						"widgets"
-					]
+				{
+					"name": "Post widget to a Dashboard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "postman-token",
+								"value": "ad96fae8-1de7-0da0-d527-fa1fc6febe57"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\t\"name\":\"Widget X\",\n\t\t\t\"sources\": [\n\t\t\t\t{\n\t\t\t\t\t\"url\":\"http://google..es\",\n\t\t\t\t\t\"parameters\":[\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_a\",\n\t\t\t\t\t\t\t\"operator\":\"operator_a\",\n\t\t\t\t\t\t\t\"value\":\"value_a\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"name\":\"parameter_b\",\n\t\t\t\t\t\t\t\"operator\":\"operator_b\",\n\t\t\t\t\t\t\t\"value\":\"value_b\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"type\":{\"name\":\"winki\"},\n\t\t\t\"properties\": [\n\t\t\t\t{\"name\" :\"width\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"height\", \"value\":\"220px\"},\n\t\t\t\t{\"name\" :\"position\", \"value\":\"top\"}\n\t\t\t]\n\t\t\t\n\t\t}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/data-visualization/dashboards/9/widgets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards",
+								"9",
+								"widgets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Widget",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"Widget XXY111111__\",\n   \"sources\": [   {\n      \"url\": \"http://google.es\",\n      \"parameters\":       [\n                  {\n            \"name\": \"parameter_ZZ\",\n            \"value\": \"value_c\",\n            \"operator\": \"=\"\n         },\n                  {\n            \"name\": \"parameter_q\",\n            \"value\": \">\",\n            \"operator\": \"operator_qqb\"\n         }\n      ]\n   }],\n   \"type\": {\"name\":\"controlWidgets\"},\n   \"properties\":    [\n            {\n\n         \"name\": \"width\",\n         \"value\": \"200px\"\n      },\n            {\n\n         \"name\": \"height\",\n         \"value\": \"250px\"\n      },\n            {\n\n         \"name\": \"position\",\n         \"value\": \"top\"\n      }\n   ]\n}"
+						},
+						"url": {
+							"raw": "http://stg-sac-fase-dos.emergyalabs.com:8000/data-visualization/dashboards/9/widgets/1",
+							"protocol": "http",
+							"host": [
+								"stg-sac-fase-dos",
+								"emergyalabs",
+								"com"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards",
+								"9",
+								"widgets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete widget",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://us1.fiwoo.eu:8000/data-visualization/dashboards/7/widgets/12",
+							"protocol": "http",
+							"host": [
+								"us1",
+								"fiwoo",
+								"eu"
+							],
+							"port": "8000",
+							"path": [
+								"data-visualization",
+								"dashboards",
+								"7",
+								"widgets",
+								"12"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
